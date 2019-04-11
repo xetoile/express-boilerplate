@@ -1,0 +1,18 @@
+extends layout
+block scripts
+  script(type="text/javascript" src="/public/js/promocode.js")
+block contents
+  h1 Insert a promocode
+  form(id="promocode-form" method="POST" action="#")
+    input(type="text" name="name")
+    input(type="text" name="avantage")
+    select(name="avantage_type")
+      option(value="percent")
+        | percents
+      option(value="euro")
+        | euros
+    a(onclick="promocode_add_rule(document.querySelector('promocode-form')))")
+      | add a rule
+
+
+    button(value="Insert" onclick="promocode(document.querySelector('promocode-form'))")

@@ -1,0 +1,24 @@
+extends layout
+block scripts
+  script(type="text/javascript" src="/public/js/promocode.js")
+  script(
+    type="text/javascript"
+    src="https://code.jquery.com/jquery-3.4.0.min.js"
+    integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+    crossorigin="anonymous"
+  )
+block contents
+  h1 Request a promocode
+  form(id="main" action="#")
+    | Code sought:
+    input(type="text" name="name")
+    | Age:
+    input(type="number" name="age")
+    | Location:
+    input(type="text" name="city")
+    hr
+    a(style="text-decoration:underline;color:blue;cursor:pointer" onclick="promocode(document.querySelector('#main'))")
+      | Get me my promocode!
+  hr
+  div#result
+  hr

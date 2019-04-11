@@ -10,9 +10,14 @@ const Path = require('path');
 const config = require('config');
 // loader for directories
 const loader = require('./utils/loader');
+// rdb add-on
+const rethinkdbLauncher = require('./utils/rdb');
 
+// in here we don't care about time performance: it's only executed on server launch
 module.exports = async function () {
   const app = express();
+  // decorate app with rethinkdb
+  await rethinkdbLauncher({app, config: config.get('rethinkdb')});
   // top-level configuration
   app.set('view engine', 'pug');
   app.set('views', Path.join(__dirname, 'views'));

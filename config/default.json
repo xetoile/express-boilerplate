@@ -5,5 +5,13 @@
       "extended": false
     },
     "json": {}
+  },
+  "rethinkdb": {
+    "host": "localhost",
+    "port": "28015",
+    "db": "expressBoilerplate"
+  },
+  "openweathermap": {
+    "key": "FILL IT IN A LOCAL CONFIGURATION (e.g. development.json)"
   }
 }

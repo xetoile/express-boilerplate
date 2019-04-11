@@ -49,6 +49,60 @@ describe('some suite', async () => {
 });
 ```
 
-### disclaimer
+## disclaimer
 
 - tests leak globals: `The following leaks were detected:__core-js_shared__`, due to the tests themselves (apparently supertest deps)
+- no time for more tests
+- admin section still empty
+
+## requirements
+
+- RethinkDB
+
+## how to
+
+- add a file `config/development.json` with data:
+
+```
+{
+  "openweathermap": {
+    "key": "APPID key goes there"
+  }
+}
+```
+
+- launch RethinkDB: `rethinkdb --http-port 8887`
+- launch server (it'll create DB/table): `node .`
+- navigate to RDB admin page: `http://localhost:8887`
+- insert data using data explorer, e.g.:
+
+```
+r.db('expressBoilerplate').table('promocodes').insert({
+  name: 'WeatherCode',
+  avantage: { percent: 20 },
+  restrictions: {
+    "@or": [{
+      "@age": {
+    eq: 40
+}
+    }, {
+      "@age": {
+        lt: 30,
+        gt: 15
+      },
+    }],
+    "@date": {
+      after: '2017-05-02',
+  before: '2020-05-02',
+    },
+    "@meteo": {
+      is: 'clear',
+      temp: {
+        gt: '15',
+      }
+    }
+  }
+})
+```
+
+- navigate to `http://localhost:3000/promocode` and try it
